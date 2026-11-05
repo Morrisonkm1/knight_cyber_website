@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10251e">
+  <meta name="description" content="Find a laptop that fits your major, budget, and college life.">
+  <title>Major Match — The college student laptop guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Major Match home"><span class="brand-mark">M</span><span>major<span class="brand-light">match</span></span></a>
+    <nav aria-label="Main navigation"><a href="#how">How it works</a><a href="#results">Laptop picks</a><a class="nav-cta" href="#finder">Find your fit <span>↗</span></a></nav>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> THE COLLEGE STUDENT LAPTOP GUIDE</div>
+        <h1>Big plans.<br><em>Campus</em> ready.</h1>
+        <p class="hero-description">Your laptop should fit the way you study. Pick your major and budget to find a practical starting point for classes, projects, and campus life.</p>
+        <a class="button button-light" href="#finder">Find your laptop <span>↓</span></a>
+        <div class="hero-note"><span class="note-icon">✳</span> Built around college students and campus life.</div>
+      </div>
+      <div class="hero-art" aria-label="Laptop on a student desk">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="floating-tag tag-top"><span class="tag-icon">⌘</span><span><b>Built around</b><small>your major</small></span></div>
+        <img class="hero-laptop" src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1100&q=85" alt="Open laptop ready for a day of studying">
+        <div class="floating-tag tag-bottom"><span class="tag-star">✦</span><span><b>Study smarter</b><small>Spend where it counts</small></span></div>
+        <div class="image-caption">YOUR NEXT SEMESTER STARTS HERE <span>01 / 04</span></div>
+      </div>
+    </section>
+
+    <section class="finder-section" id="finder">
+      <div class="section-heading"><div><div class="eyebrow dark-eyebrow">LET’S FIND YOUR FIT</div><h2>What are you studying?</h2></div><p>Choose your major or area of study. We’ll match you to laptops that fit the work you’re likely to do.</p></div>
+      <div class="finder-panel">
+        <div class="field-block major-field"><label for="major-input">My major</label><div class="select-wrap"><span class="field-icon">▦</span><input id="major-input" list="major-suggestions" placeholder="Type or choose a suggestion" autocomplete="off"><datalist id="major-suggestions"><option value="Accounting"><option value="Biology"><option value="Business"><option value="Communication"><option value="Computer science"><option value="Data science"><option value="Design"><option value="Economics"><option value="Education"><option value="Engineering"><option value="English"><option value="Film and media"><option value="Finance"><option value="Graphic design"><option value="Health sciences"><option value="History"><option value="Humanities"><option value="Information technology"><option value="Marketing"><option value="Mathematics"><option value="Nursing"><option value="Psychology"><option value="Social sciences"><option value="Software engineering"></datalist></div></div>
+        <div class="field-block budget-field"><label for="budget">My budget is</label><div class="select-wrap"><span class="field-icon">＄</span><select id="budget"><option value="any">Any budget</option><option value="student">Under $800</option><option value="mid">$800–$1,400</option><option value="premium">$1,400+</option></select><span class="select-arrow">⌄</span></div></div>
+        <div class="field-block os-field"><label for="operating-system">I prefer</label><div class="select-wrap"><span class="field-icon">⌘</span><select id="operating-system"><option value="any">Any operating system</option><option value="mac">Mac</option><option value="windows">Windows</option><option value="linux">Linux</option></select><span class="select-arrow">⌄</span></div></div>
+        <button class="button button-green" id="find-button">Show my matches <span>↗</span></button>
+      </div>
+      <p class="form-note"><span>ⓘ</span> Department software requirements can differ. Check your program’s required apps and minimum specs before buying. Linux support varies by configuration. Photos are illustrative; prices and configurations vary.</p>
+    </section>
+
+    <section class="results-section" id="results" aria-live="polite">
+      <div class="results-heading"><div><div class="eyebrow dark-eyebrow">THOUGHTFUL PICKS, REAL TRADEOFFS</div><h2 id="results-title">Good laptops for college life</h2></div><div class="result-count" id="result-count">4 PICKS <span>·</span> UPDATED FOR STUDENTS</div></div>
+      <div class="filter-row"><div class="filter-label">MADE FOR YOUR MAJOR</div><div class="chips" role="group" aria-label="Filter by major"><button class="chip active" data-filter="all">All majors</button><button class="chip" data-filter="computer">Computing</button><button class="chip" data-filter="engineering">Engineering</button><button class="chip" data-filter="creative">Creative</button><button class="chip" data-filter="business">Business</button></div><span class="sort-note">Curated for everyday student needs <span>⌁</span></span></div>
+      <div class="cards-grid" id="cards-grid"></div>
+      <div class="empty-state" id="empty-state" hidden><span>⌕</span><h3>No picks in that range yet</h3><p>Try another major, budget, or operating system to see more options.</p></div>
+    </section>
+
+    <section class="how-section" id="how"><div class="how-intro"><div class="eyebrow">A LITTLE LESS GUESSWORK</div><h2>Buy for the work<br>you’ll actually do.</h2><p>Specs can get confusing fast. We focus on the things that matter for your classes and daily campus routine.</p><a href="#finder" class="text-link">Start matching <span>↗</span></a></div><div class="how-steps"><article><span class="step-num">01</span><div><h3>Pick your path</h3><p>Tell us your major and how much you’re comfortable spending.</p></div><span class="step-icon">⌕</span></article><article><span class="step-num">02</span><div><h3>See the tradeoffs</h3><p>Compare strengths and compromises in plain language.</p></div><span class="step-icon">↔</span></article><article><span class="step-num">03</span><div><h3>Check before you buy</h3><p>Confirm your department’s software, warranty, and student pricing.</p></div><span class="step-icon">✓</span></article></div></section>
+    <section class="bottom-cta"><div class="cta-spark">✳</div><div><div class="eyebrow">YOUR NEXT GREAT IDEA IS LOADING</div><h2>Ready to find your fit?</h2><p>A better college setup starts with one good choice.</p></div><a class="button button-light" href="#finder">Find my laptop <span>↑</span></a></section>
+  </main>
+  <footer><a class="brand footer-brand" href="#top"><span class="brand-mark">M</span><span>major<span class="brand-light">match</span></span></a><p>Made for college students who have better things to do than decode spec sheets.</p><span class="footer-copy">© 2026 MAJOR MATCH <span>·</span> STUDY WELL.</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
