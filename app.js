@@ -1,4 +1,7 @@
+// JavaScript adds behavior to the page. This array (a list) holds one object (a grouped set of named values) for each recommended laptop.
+// The fields describe each laptop so the page can filter and display it consistently.
 const laptops = [
+  // Every item uses the same fields; this list starts with several popular student models.
   {
     name: 'MacBook Air 13” (M5)', brand: 'APPLE', image: 'https://www.apple.com/v/macbook-air/z/images/meta/macbook_air_mx__ez5y0k5yy7au_og.png?202610261111',
     imageAlt: 'Apple MacBook Air 13-inch laptop', majors: ['computer','creative','health','humanities'], budget: 'mid', operatingSystems: ['mac'],
@@ -6,6 +9,7 @@ const laptops = [
     price: 'Midrange', pros: ['Light to carry between classes','Strong battery life for a full day'], cons: ['Some major-specific apps require Windows','Memory and storage upgrades cost more'],
     link: 'https://www.apple.com/macbook-air/'
   },
+  // This lower-cost Windows option also has Linux configurations.
   {
     name: 'ThinkPad E14 Gen 7', brand: 'LENOVO', image: 'https://psrefstuff.lenovo.com/syspool/Sys/Image/ThinkPad/ThinkPad_E14_Gen_7_Intel/Compressedimage/ThinkPad_E14_Gen_7_Intel_CT1_05.png',
     imageAlt: 'Lenovo ThinkPad E14 Gen 7 laptop', majors: ['business','computer','engineering','humanities','health'], budget: 'student', operatingSystems: ['windows','linux'],
@@ -13,6 +17,7 @@ const laptops = [
     price: 'Lower-cost options', pros: ['Windows compatibility suits many programs','Work-friendly keyboard and build'], cons: ['Linux is available only on select configurations','Less suited to demanding 3D graphics'],
     link: 'https://www.lenovo.com/us/en/c/laptops/thinkpad/thinkpade/'
   },
+  // This premium Windows laptop is aimed at creative projects.
   {
     name: 'ProArt P16', brand: 'ASUS', image: 'https://dlcdnwebimgs.asus.com/gain/b6f5b8f0-4746-4aca-a64f-18d4ad86b83b/',
     imageAlt: 'ASUS ProArt P16 laptop', majors: ['creative','engineering'], budget: 'premium', operatingSystems: ['windows'],
@@ -20,6 +25,7 @@ const laptops = [
     price: 'Premium', pros: ['High-resolution display options','Dedicated graphics for heavier creative work'], cons: ['Costs more and weighs more than a basic laptop','Powerful components can mean shorter battery life'],
     link: 'https://www.asus.com/us/laptops/for-creators/proart/proart-p16-h7606/'
   },
+  // This lower-cost Windows laptop has a larger screen for everyday schoolwork.
   {
     name: 'ASUS Vivobook 16', brand: 'ASUS', image: 'https://dlcdnwebimgs.asus.com/gain/72549656-e4c9-4d7b-94a6-f391d3a9e9e6/',
     imageAlt: 'ASUS Vivobook laptop', majors: ['computer','business','humanities','health'], budget: 'student', operatingSystems: ['windows'],
@@ -76,6 +82,7 @@ const laptops = [
     price: 'Midrange', pros: ['Designed for repair and part upgrades','Official Linux guides are available'], cons: ['DIY editions take setup time','Check Linux distro and kernel support for your exact hardware'],
     link: 'https://frame.work/laptop13'
   },
+  // The System76 entries below are Linux-focused choices for portable work, development, and graphics.
   {
     name: 'Lemur Pro', brand: 'SYSTEM76', image: 'https://cdn11.bigcommerce.com/s-pywjnxrcr2/products/1625/images/2030/lemp14-14in-quarter-white__08793.1784727578.386.513.jpg?c=1',
     imageAlt: 'System76 Lemur Pro laptop', majors: ['computer','engineering','business','humanities'], budget: 'premium', operatingSystems: ['linux'],
@@ -106,6 +113,8 @@ const laptops = [
   }
 ];
 
+// These variables keep references to the page controls and result areas so the code can update them.
+// A variable is a named place to keep a value; querySelector finds the first page element matching a selector.
 const majorInput = document.querySelector('#major-input');
 const budgetSelect = document.querySelector('#budget');
 const operatingSystemSelect = document.querySelector('#operating-system');
@@ -113,6 +122,7 @@ const grid = document.querySelector('#cards-grid');
 const count = document.querySelector('#result-count');
 const title = document.querySelector('#results-title');
 const empty = document.querySelector('#empty-state');
+// These lookup objects translate short category codes into readable headings and labels.
 const majors = {
   all: 'Good laptops for college life', business: 'Laptops for business & economics', computer: 'Laptops for computing students',
   engineering: 'Laptops for engineering & architecture', creative: 'Laptops for creative work', health: 'Laptops for health & life sciences', humanities: 'Laptops for humanities & education'
@@ -122,6 +132,7 @@ const majorSuggestions = {
   all: '', business: 'Business & economics', computer: 'Computer science', engineering: 'Engineering & architecture',
   creative: 'Design, film & media', health: 'Health & life sciences', humanities: 'Humanities & social sciences'
 };
+// Regular expressions are text-search patterns. These patterns recognize common words in major names.
 const majorPatterns = [
   ['business', /business|account|econom|finance|marketing|management|entrepreneur/],
   ['computer', /computer|software|information technology|\bit\b|data science|cyber|programming/],
@@ -131,6 +142,7 @@ const majorPatterns = [
   ['humanities', /humanit|education|history|english|social science|psycholog|sociolog|political|philosoph|language/]
 ];
 
+// A function is a reusable set of steps. This one converts the typed major into a category used for matching.
 function categoryForMajor(majorText) {
   const value = majorText.trim().toLowerCase();
   if (!value) return 'all';
@@ -138,6 +150,8 @@ function categoryForMajor(majorText) {
   return majorPatterns.find(([, pattern]) => pattern.test(value))?.[0] ?? 'custom';
 }
 
+// Render means build or refresh what appears on screen. This function filters the laptop list and creates its result cards.
+// The template literal below is a text template that can include values from JavaScript inside ${...}.
 function render() {
   const majorText = majorInput.value;
   const major = categoryForMajor(majorText);
@@ -157,30 +171,38 @@ function render() {
     </article>`).join('');
 }
 
+// An event listener waits for an action. When the visitor clicks the button, update results and scroll to them.
 document.querySelector('#find-button').addEventListener('click', () => {
   render();
   document.querySelector('#results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
+// Each major filter button updates the major field and refreshes the results.
 document.querySelectorAll('.chip').forEach((chip) => chip.addEventListener('click', () => {
   document.querySelectorAll('.chip').forEach((item) => item.classList.remove('active'));
   chip.classList.add('active');
   majorInput.value = majorSuggestions[chip.dataset.filter] ?? '';
   render();
 }));
+// Keep the highlighted filter in sync as the visitor types a major name.
 majorInput.addEventListener('input', () => {
   const category = categoryForMajor(majorInput.value);
   document.querySelectorAll('.chip').forEach((chip) => chip.classList.toggle('active', chip.dataset.filter === category || (category === 'custom' && chip.dataset.filter === 'all')));
 });
+// Show the default laptop results when the page first opens.
 render();
 
+// This button switches between the two color themes and remembers the choice in browser storage.
 const themeToggle = document.querySelector('#theme-toggle');
+// Update the page theme, button label, accessibility state, and saved preference together.
 function setTheme(theme) {
   document.documentElement.dataset.theme = theme;
   themeToggle.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
   themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
   try { localStorage.setItem('major-match-theme', theme); } catch { /* Storage may be disabled by the browser. */ }
 }
+// Restore the theme loaded by index.html; use light mode if there was no saved dark choice.
 setTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+// Clicking the button selects the other theme.
 themeToggle.addEventListener('click', () => {
   setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
 });
