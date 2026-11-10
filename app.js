@@ -172,3 +172,15 @@ majorInput.addEventListener('input', () => {
   document.querySelectorAll('.chip').forEach((chip) => chip.classList.toggle('active', chip.dataset.filter === category || (category === 'custom' && chip.dataset.filter === 'all')));
 });
 render();
+
+const themeToggle = document.querySelector('#theme-toggle');
+function setTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  themeToggle.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+  themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+  try { localStorage.setItem('major-match-theme', theme); } catch { /* Storage may be disabled by the browser. */ }
+}
+setTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+themeToggle.addEventListener('click', () => {
+  setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+});
